@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Recommender</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #164863; /* Dark blue background color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #DDF2FD; /* Light blue text color */
+        }
+
+        h1 {
+            color: #FFFFFF; /* White text color */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #FFFFFF; /* White text color */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the search bar */
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #164863; /* Dark blue text color */
+        }
+
+        /* Style for the search button */
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #9BBEC8; /* Light teal color */
+            color: #164863; /* Dark blue text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #427D9D; /* Dark teal color on hover */
+        }
+
+        /* Center the form */
+        form {
+            text-align: center;
+        }
+
+        /* Style for the search results div */
+        #searchResults {
+            color: #333; /* Dark gray text color */
+        }
+    </style>
+</head>
+<body>
+    <h1>Course Recommender</h1>
+    <h2>Search for recommendations</h2>
+    <form id="searchForm">
+        <input type="text" name="search" id="searchInput" required>
+        <input type="submit" value="Search">
+    </form>
+    
+    <div id="searchResults">
+        <!-- Results will be displayed here -->
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Intercept the form submission
+            $("#searchForm").submit(function(e) {
+                e.preventDefault();  // Prevent the default form submission
+
+                // Get the search term
+                var searchTerm = $("#searchInput").val();
+
+                // Make an AJAX request
+                $.ajax({
+                    type: "POST",
+                    url: "/search",
+                    data: { search: searchTerm },
+                    success: function(data) {
+                        // Update the content of the searchResults div
+                        $("#searchResults").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

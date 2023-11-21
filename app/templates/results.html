@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #164863; /* Dark blue background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #DDF2FD; /* Light blue text color */
+        }
+
+        .container {
+            text-align: left;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #427D9D; /* Dark teal background color for the container */
+            transition: box-shadow 0.3s ease;
+            margin: 20px;
+        }
+
+        .container:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px; /* Adjusted margin to make it visible */
+            color: #9BBEC8; /* Light teal text color */
+            transition: margin 0.3s ease, color 0.3s ease;
+        }
+
+        h1:hover {
+            margin-bottom: 20px; /* Adjusted margin on hover */
+            color: #DDF2FD;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #427D9D; /* Dark teal text color */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        li {
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            background-color: #DDF2FD;
+        }
+
+        li:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            display: block;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #164863; /* Dark blue text color */
+            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        a:hover {
+            color: #427D9D;
+            text-decoration: none;
+            transform: scale(1.05);
+            background-color: #164863;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #9BBEC8;
+            color: #164863;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #DDF2FD;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Congratulations on completing the course!<br>"{{ search_term }}"</h1>
+        <h4>You might also like:</h4>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>
+                    <a href="{{ recommendation.url }}" target="_blank">
+                        {{ recommendation.course_name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
